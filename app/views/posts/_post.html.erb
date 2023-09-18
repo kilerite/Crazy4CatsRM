@@ -1,0 +1,38 @@
+<div id="<%= dom_id post %>" class="card mb-4">
+  <div class="card-body">
+    <h2 class="card-title text-center"><%= post.title %></h2>
+    <p class="card-text"><%= post.content %></p>
+    <p><strong>Autor: </strong><%= post.user %></p>
+
+    <div class="row py-3">
+      <span>Reacciones <%= post.reactions.count %> personas</span>
+    </div>
+
+    <div class="row py-3">
+      <div class="col-md-6">
+        <%= link_to 'Comenta', "/comments/new?post=#{post.id}", class: 'btn btn-primary w-140' %>
+      </div>
+
+      <div class="col-md-6">
+        <% if user_signed_in? %>
+          <% reaction = current_user.reactions.find_by(post: post) %>
+          <% if reaction.nil? %>
+            <%= button_to "Me gusta", reactions_path, params: { reaction: { post_id: post.id } }, method: :post, class: "btn btn-secondary w-100" %>
+          <% else %>
+            <%= button_to "No me gusta", reaction_path(reaction), method: :delete, class: "btn btn-secondary w-100" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row py-3">
+      <% post.comments.each do |comment| %>
+        <% if comment.user_id == 0 %>
+          <p class="card-text">Anónimo comenta: <%= comment.content %></p>
+        <% else %>
+          <p class="card-text"><%= comment.user.email %> comenta: <%= comment.content %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

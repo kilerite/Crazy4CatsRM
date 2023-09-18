@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crazy4Cats - Locos por los Gatos...</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= render 'shared/navbar' %>
+    <div class="container">
+
+      <%= yield %>
+    </div>
+    <%= render 'shared/footer' %>
+    <script src="https://kit.fontawesome.com/78ae44b048.js" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row py-5">
+    <div class="col-12">
+      <h1 class="text-center">
+        <%= image_tag("navbar/logo", alt: "Logo", style: "width: 50px; height: 50px;" ) %> Crazy4Cats
+      </h1>
+      <p class="text-center">No solo los Humanos tienen Historias que contar....</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-8">
+      <% @posts.each do |post| %>
+        <div class="card mb-4">
+          <div class="card-body">
+            <%= render post %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if user_signed_in? %>
+      <div class="col-12 col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <%= link_to "Nueva publicación", new_post_path, class: "btn btn-success btn-block" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
